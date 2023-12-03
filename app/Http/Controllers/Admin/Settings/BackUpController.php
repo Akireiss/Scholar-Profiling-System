@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Admin\Settings;
 
+use Illuminate\Http\File;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Response;
+
 class BackUpController extends Controller
 {
     public function index() {
@@ -51,34 +55,87 @@ protected function downloadBackup($filename, $content)
     );
 }
 
-    public function restore(Request $request)
-    {
-        // Validate user input
-        $request->validate([
-            'database_name' => 'required|string',
-            'sql_file' => 'required',
-        ]);
+public function restore(Request $request)
+{
+    // Validate user input
+    $request->validate([
+        'database_name' => 'required|string',
+        'sql_file' => 'required',
+    ]);
 
-        $newDatabaseName = $request->input('database_name');
-        $sqlFile = $request->file('sql_file');
+    $newDatabaseName = $request->input('database_name');
+    $sqlFile = $request->file('sql_file');
 
-        // Check if the new database name already exists
-        $existingDatabases = DB::select("SHOW DATABASES");
-        $existingDatabaseNames = array_column($existingDatabases, 'Database');
+    // Check if the new database name already exists
+    $existingDatabases = DB::select("SHOW DATABASES");
+    $existingDatabaseNames = array_column($existingDatabases, 'Database');
 
-        if (in_array($newDatabaseName, $existingDatabaseNames)) {
-            return redirect()->back()->with('error', "Database '$newDatabaseName' already exists.");
-        }
+    if (in_array($newDatabaseName, $existingDatabaseNames)) {
+        return redirect()->back()->with('error', "Database '$newDatabaseName' already exists.");
+    }
 
-        // Create a new database
-        DB::statement("CREATE DATABASE IF NOT EXISTS $newDatabaseName");
+    // Create a new database
+    DB::statement("CREATE DATABASE IF NOT EXISTS $newDatabaseName");
 
-        // Import data from the SQL file into the new database
-        $importCommand = "mysql --user=" . env('DB_USERNAME') . " --password=" . env('DB_PASSWORD') . " $newDatabaseName < " . $sqlFile->getPathname();
-        shell_exec($importCommand);
+    // Import data from the SQL file into the new database
+    $importCommand = "mysql --user=" . env('DB_USERNAME') . " --password=" . env('DB_PASSWORD') . " $newDatabaseName < " . $sqlFile->getPathname();
+    shell_exec($importCommand);
+
+    // Redirect with a success message
+    return redirect()->back()->with('success', "Database '$newDatabaseName' is created and data is imported.");
+}
+
+
+private function databaseExists($databaseName)
+{
+    try {
+        // Use a raw SQL query to check if the database exists
+        $result = DB::select("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = ?", [$databaseName]);
+
+        return count($result) > 0;
+    } catch (\Exception $e) {
+        return false;
+    }
+}
+
+public function changeDatabaseName(Request $request)
+{
+    // Validate user input
+    $request->validate([
+        'new_database_name' => 'required|string',
+    ]);
+
+    $newDatabaseName = $request->input('new_database_name');
+
+    // Check if the new database name exists
+    if (!$this->databaseExists($newDatabaseName)) {
+        return back()->with('error', 'The specified database does not exist.');
+    }
+
+    // Get the content of the .env file
+    $envFilePath = base_path('.env');
+    $envContent = File::get($envFilePath);
+
+    // Replace the old database name with the new one in the .env file
+    $newEnvContent = Str::replaceFirst('DB_DATABASE=' . env('DB_DATABASE'), 'DB_DATABASE=' . $newDatabaseName, $envContent);
+
+    // Write the updated content back to the .env file
+    File::put($envFilePath, $newEnvContent);
+
+    try {
+        // Attempt to reconnect to the database with the new name
+        DB::reconnect();
 
         // Redirect with a success message
-        return redirect()->back()->with('success', "Database '$newDatabaseName' is created and data is imported.");
+        return back()->with('success', 'Database name has been changed.');
+    } catch (\Exception $e) {
+        // Handle the exception, e.g., display an error message
+        return back()->with('error', 'Error changing database name: ' . $e->getMessage());
+    }
+}
+
+    public function restoreDatabase() {
+        return view('admin.database.restore');
     }
 
 }

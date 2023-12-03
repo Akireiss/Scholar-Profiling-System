@@ -53,3 +53,8 @@ Route::middleware(['guest'])->group(function () {
     // Logout
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 });
+
+
+Route::get('restore/database', [BackUpController::class, 'restoreDatabase'])
+->name('database.restore');
+

@@ -26,9 +26,9 @@
     </div>
 
     <!-- Restore Database Form -->
-    <div class="flex-1">
-        <div class="bg-white px-6 py-4 shadow rounded-lg">
-            <h6 class="text-md my-1  font-bold uppercase mt-1">Repair Database</h2>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Repair Database</h5>
 
             @if (session('success'))
                 <div class="text-success p-2 rounded text-green-700 mb-2">
@@ -45,19 +45,16 @@
             <form action="{{ route('restore.database') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-4">
-                    <x-label for="new_database_name">Database Name: <span class="text-sm text-danger">(e.g., MyDatabase_01-2023)</span></x-label>
-                    <input type="text" required name="database_name" id="new_database_name" class="border rounded p-2 w-full"/>
+                    <x-label for="new_database_name">Database Name: <span class="text-sm text-danger">
+                        (e.g., MyDatabase_01-2023)</span></x-label>
+                    <x-input type="text" required name="database_name" id="new_database_name" />
                     @error('database_name')
                     <span class="text-sm text-red-500">{{ $message }}</span>
                 @enderror
                 </div>
                 <div class="mb-4">
                     <x-label for="sql_file">Upload SQL File:</x-label>
-                    <input type="file" required name="sql_file" id="sql_file"
-                        class="block w-full border border-gray-200 shadow-sm rounded-md text-sm
-                        file:bg-transparent file:border-0
-                        file:bg-gray-100 file:mr-4
-                        file:py-2.5 file:px-4">
+                    <x-input type="file" required name="sql_file" id="sql_file"/>
 
                 @error('sql_file')
                 <span class="text-sm text-red-500">{{ $message }}</span>
@@ -65,7 +62,7 @@
                 </div>
     <div class="col-12 d-flex justify-content-end align-items-center">
                         <span id="alert" class="text-success text-sm"></span>
-                        <button class="btn btn-success mx-2" type="submit">Update Profile</button>
+                        <button class="btn btn-success mx-2" type="submit">Restore Database</button>
                     </div>
             </form>
 
