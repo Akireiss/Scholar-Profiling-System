@@ -2,8 +2,9 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Database\QueryException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -26,5 +27,22 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+
+        if ($exception instanceof QueryException && $this->isUnknownDatabaseException($exception)) {
+            // Redirect to a common error page for database connection issues
+            return redirect()->route('database.restore')->with('error', 'Database have been corrupt');
+        }
+
+        return parent::render($request, $exception);
+    }
+
+    protected function isUnknownDatabaseException(QueryException $exception)
+    {
+        // The error code for an unknown database in MySQL is 1049
+        return $exception->getCode() == 1049;
     }
 }

@@ -110,7 +110,7 @@
                         <x-select wire:model="province_id">
 
                             @foreach ($provinces as $province)
-                            <option value="{{ $province->provCode }}">{{ $province->provDesc }}</option>
+                            <option value="{{ $province->id }}">{{ $province->provDesc }}</option>
 
                             @endforeach
 
@@ -195,8 +195,12 @@
                     <x-feedback />
                 </div>
 
-                <div class="col-12 d-flex justify-content-end  ">
-                    <button class="btn btn-success" type="submit">Submit form</button>
+                <div class="col-12 d-flex justify-content-end align-items-center">
+                    <x-text-alert />
+                    <div wire:loading wire:target="saveStudent" class="mx-4">
+                        Loading...
+                    </div>
+                    <button class="btn btn-success mx-2" type="submit">Submit form</button>
                 </div>
             </form>
 

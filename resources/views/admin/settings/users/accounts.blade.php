@@ -3,17 +3,17 @@
 
 
     <div class="pagetitle">
-      <h1>Students</h1>
+      <h1>User Accounts</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Students</li>
+          <li class="breadcrumb-item active">User Accounts</li>
         </ol>
       </nav>
     </div>
 
     <div class="d-flex justify-content-end my-2">
-        <a href="{{ route('admin.students.create') }}" class="btn btn-success">Add Student</a>
+        <a href="{{ route('admin.account.create') }}" class="btn btn-success">Add Account</a>
     </div>
 
     <section class="section">
@@ -29,29 +29,29 @@
                   <thead>
                     <tr>
                       <th>
-                        Student ID</th>
-                      <th>Name</th>
-                      <th>Sex</th>
-                      <th >Course</th>
-                      <th>Campus</th>
+                        <b>N</b>ame
+                      </th>
+                      <th>Username</th>
+                      <th>Role</th>
                       <th>Manage</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    @forelse ($students as $student)
+                 <tbody>
+                    @foreach ($users as $user)
+
                     <tr>
-                        <td>{{ $student->student_id }}</td>
-                      <td>{{ $student->firstname }} {{ $student->last_name }}</td>
-                      <td>{{ $student->sex }}</td>
-                      <td>{{ $student->course->courses }}</td>
-                      <td>{{ $student->campus->campus_name }}</td>
+                      <td>{{ $user->name }}</td>
+                      <td>{{ $user->username }}</td>
+                      <td>
+                        {{ $user->role == 0 ? 'Admin' : ($user->role == 1 ? 'Staff' : 'Unknown Role') }}
+                    </td>
+
                       <td></td>
                     </tr>
-                    @empty
-                        <tr>
-                            <td>No Data</td>
-                        </tr>
-                    @endforelse
+                    @endforeach
+
+
+
 
                   </tbody>
                 </table>

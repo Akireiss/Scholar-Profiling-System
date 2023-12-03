@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Course;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Student extends Model
 {
@@ -21,7 +22,7 @@ class Student extends Model
         'province_id',
         'municipal_id',
         'barangay_id',
-         'campus',
+         'campus_id',
         'course_id',
         'level',
         'father',
@@ -34,4 +35,11 @@ class Student extends Model
 
         'student_status'
     ];
+
+    public function course() {
+        return $this->belongsTo(Course::class);
+    }
+    public function campus() {
+        return $this->belongsTo(Campus::class);
+    }
 }

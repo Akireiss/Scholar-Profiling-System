@@ -59,7 +59,7 @@ class StudentCreate extends Component
 
         Student::create([
             'student_id' => $this->student_id,
-            'campus' => $this->campus,
+            'campus_id' => $this->campus,
             'student_type' => $this->student_type,
             'school_name' => $this->school_name,
             'lastYear' => $this->lastYear,
@@ -80,6 +80,7 @@ class StudentCreate extends Component
         ]);
 
         $this->resetForm();
+        session()->flash('message', 'Successfully Submitted');
 
     }
 

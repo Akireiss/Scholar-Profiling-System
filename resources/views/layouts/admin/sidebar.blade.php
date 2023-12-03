@@ -45,7 +45,7 @@
             </a>
           </li>
           <li>
-            <a href="forms-editors.html">
+            <a href="{{ route('admin.settings.backup') }}">
               <i class="bi bi-circle"></i><span>Back Up</span>
             </a>
           </li>
@@ -64,12 +64,12 @@
         </a>
         <ul id="forms-navbar" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="forms-elements.html">
+            <a href="{{ route('admin.profile') }}">
               <i class="bi bi-circle"></i><span>Profile</span>
             </a>
           </li>
           <li>
-            <a href="forms-layouts.html">
+            <a href="{{ route('admin.accounts') }}">
               <i class="bi bi-circle"></i><span>User Accounts</span>
             </a>
           </li>
@@ -88,13 +88,12 @@
         </a>
       </li><!-- End Error 404 Page Nav -->
 
-<li class="nav-item">
-  <a class="nav-link collapsed" href="pages-login.html">
-    <i class="bi bi-box-arrow-in-left"></i>
-    <span>Log Out</span>
-  </a>
-</li><!-- End Login Page Nav -->
-
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('logout') }}">
+          <i class="bi bi-box-arrow-in-left"></i>
+          <span>Log Out</span>
+        </a>
+      </li>
 
     </ul>
 

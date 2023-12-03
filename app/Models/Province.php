@@ -13,6 +13,6 @@ class Province extends Model
         'psgcCode',
         'provDesc',
         'regCode',
-        'provCode'
+        'id'
     ];
 }

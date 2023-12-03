@@ -52,6 +52,13 @@ trait StudentTrait
         $this->province_id = '';
         $this->municipal_id = '';
         $this->barangay_id = '';
+
+       $this->courseNluc =  '';
+       $this->courseMluc = '';
+       $this->courseSluc = '';
+       $this->level = '';
+
+
         $this->level = '';
         $this->course = '';
         // ... reset other fields
