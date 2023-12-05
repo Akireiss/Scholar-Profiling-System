@@ -3,17 +3,17 @@
 
 
     <div class="pagetitle">
-      <h1>Scholarships</h1>
+      <h1>Students</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Scholarships</li>
+          <li class="breadcrumb-item active">Students</li>
         </ol>
       </nav>
     </div>
 
     <div class="d-flex justify-content-end my-2">
-        <a href="{{ route('admin.scholar.create') }}" class="btn btn-success">Add Scholarship</a>
+        <a href="{{ route('admin.students.create') }}" class="btn btn-success">Add Student</a>
     </div>
 
     <section class="section">
@@ -28,26 +28,25 @@
                 <table class="table datatable">
                   <thead>
                     <tr>
-
-                      <th>Scholar Name</th>
-                      <th>Scholar Tyre</th>
-                      <th>Status</th>
-                      <th>Manage</th>
+                      <th>
+                        Student ID</th>
+                      <th>Name</th>
+                      <th>Sex</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($scholars as  $scholar)
-
+                    @forelse ($scholars as $scholar)
                     <tr>
-                      <td>{{$scholar->scholarship_name }}</td>
-                      <td>{{$scholar->scholarship_type== 0 ? 'Government' : ($scholar->scholarship_type == 1 ? 'Private' : 'Unknown') }}</td>
-                      <td> {{ $scholar->status == 0 ? 'Active' : ($scholar->status == 1 ? 'Inactive' : 'Unknown') }}</td>
-                        <td><a class="btn btn-success" href="{{ url('admin/scholars/edit/' . $scholar->id ) }}">
-                            Edit
-                        </a></td>
-                    </tr>
-                    @endforeach
+                        <td>{{ $scholar->scholarship_name }}</td>
+                      <td>{{ $scholar->scholarship_type }} </td>
+                      <td>{{ $scholar->status }}</td>
 
+
+                    @empty
+                        <tr>
+                            <td>No Data</td>
+                        </tr>
+                    @endforelse
 
                   </tbody>
                 </table>

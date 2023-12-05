@@ -2,7 +2,7 @@
 @section('content')
 
 
-@if (request()->routeIs('admin.scholar.store'))
+@if (request()->routeIs('admin.scholar.create'))
     <div>
 
         <div class="pagetitle">
@@ -152,7 +152,7 @@
     });
 </script>
 
-{{-- Update  --}}
+@if (request()->routeIs('admin.scholar.edit'))
 <script>
     $(document).ready(function () {
         $('#scholarUpdate').submit(function (e) {
@@ -174,6 +174,6 @@
         });
     });
 </script>
-
+@endif
 
 @endsection

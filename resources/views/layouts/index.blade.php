@@ -1,5 +1,4 @@
 @include('layouts.header')
-@livewireStyles
 
 @include('layouts.admin.navbar')
 @include('layouts.admin.sidebar')
@@ -9,5 +8,4 @@
 </main>
 
 @include('components.footer')
-@livewireScripts
 @include('layouts.footer')
