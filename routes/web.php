@@ -5,9 +5,10 @@ use App\Livewire\Admin\ScholarshipCreate;
 use App\Livewire\Admin\Student\StudentCreate;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Admin\ScholarshipController;
 use App\Http\Controllers\Admin\Settings\BackUpController;
 use App\Http\Controllers\Admin\Settings\StudentController;
+use App\Http\Controllers\Admin\StudentScholarshipController;
+use App\Http\Controllers\Admin\Settings\ScholarshipController;
 
 Route::middleware(['auth'])->group(function () {
     // Admin Dashboard
@@ -16,12 +17,21 @@ Route::middleware(['auth'])->group(function () {
     })->name('admin.dashboard');
 
     // Scholarship Routes
-    Route::get('admin/scholarship', [ScholarshipController::class, 'index'])->name('admin.scholarship');
-    Route::get('admin/scholarship/create', ScholarshipCreate::class)->name('admin.scholarship.create');
+    Route::get('admin/students/scholarship', [StudentScholarshipController::class, 'index'])->name('admin.student.scholarship');
+    Route::get('admin/students/scholarship/create', ScholarshipCreate::class)->name('admin.scholarship.create');
 
     // Students Routes
     Route::get('admin/students', [StudentController::class, 'index'])->name('admin.students');
     Route::get('admin/students/create', StudentCreate::class)->name('admin.students.create');
+
+    //Settings->scholar
+    Route::get('admin/scholars', [ScholarshipController::class, 'index'])->name('admin.scholar');
+    //create
+    Route::get('admin/scholars/create', [ScholarshipController::class, 'create'])->name('admin.scholar.create');
+    Route::post('admin/scholars/store', [ScholarshipController::class, 'store'])->name('admin.scholar.store');
+
+    Route::get('admin/scholars/edit/{scholar}', [ScholarshipController::class, 'edit'])->name('admin.scholar.edit');
+    Route::put('admin/scholars/update/{scholar}', [ScholarshipController::class, 'update'])->name('admin.scholar.update');
 
     // User Routes
     Route::get('admin/settings/profile', [UserController::class, 'index'])->name('admin.profile');

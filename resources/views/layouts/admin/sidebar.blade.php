@@ -11,9 +11,9 @@
 
 
       <li class="nav-item">
-        <a class="nav-link collapsed"  href="{{ route('admin.scholarship') }}">
+        <a class="nav-link collapsed"  href="{{ route('admin.student.scholarship') }}">
           <i class="bi bi-box-arrow-in-right"></i>
-          <span>Scholarships</span>
+          <span>Student Scholars</span>
         </a>
       </li>
 
@@ -29,11 +29,21 @@
               <i class="bi bi-circle"></i><span>Students</span>
             </a>
           </li>
+
+          <li>
+            <a href="{{ route('admin.scholar') }}">
+              <i class="bi bi-circle"></i><span>Scholars</span>
+            </a>
+          </li>
+
+
           <li>
             <a href="forms-layouts.html">
               <i class="bi bi-circle"></i><span>Program</span>
             </a>
           </li>
+
+
           <li>
             <a href="forms-layouts.html">
               <i class="bi bi-circle"></i><span>School Year</span>
