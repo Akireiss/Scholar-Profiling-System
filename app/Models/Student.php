@@ -42,4 +42,8 @@ class Student extends Model
     public function campus() {
         return $this->belongsTo(Campus::class);
     }
+    public function studentFund() {
+    return $this->hasMany(StudentFund::class);
+    }
+
 }

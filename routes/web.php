@@ -18,7 +18,14 @@ Route::middleware(['auth'])->group(function () {
 
     // Scholarship Routes
     Route::get('admin/students/scholarship', [StudentScholarshipController::class, 'index'])->name('admin.student.scholarship');
-    Route::get('admin/students/scholarship/create', ScholarshipCreate::class)->name('admin.scholarship.create');
+    Route::get('admin/students/scholarship/create', ScholarshipCreate::class)
+    ->name('admin.scholarship.create');
+    //Edit
+    Route::get('admin/students/scholarship/edit/{student}',
+    [StudentScholarshipController::class, 'edit'])
+    ->name('admin.student.scholarship.edit');
+
+
 
     // Students Routes
     Route::get('admin/students', [StudentController::class, 'index'])->name('admin.students');
@@ -68,3 +75,10 @@ Route::middleware(['guest'])->group(function () {
 Route::get('restore/database', [BackUpController::class, 'restoreDatabase'])
 ->name('database.restore');
 
+
+
+//ajax request
+Route::get('/fetch-fund-sources/{scholarshipId}',
+[StudentScholarshipController::class, 'fetchFundSources']);
+Route::post('student/scholar/create',
+[StudentScholarshipController::class, 'store'])->name('student.scholar.create');

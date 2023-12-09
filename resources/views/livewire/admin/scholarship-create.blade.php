@@ -11,7 +11,7 @@
     </div>
 
       <div class="d-flex justify-content-end my-2">
-          <a href="{{ route('admin.scholarship') }}" class="btn btn-success">Back</a>
+          <a href="{{ route('admin.student.scholarship') }}" class="btn btn-success">Back</a>
       </div>
 
 

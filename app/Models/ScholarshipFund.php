@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Scholarship extends Model
+class ScholarshipFund extends Model
 {
     use HasFactory;
-
-    protected $table =
-        'scholarships';
+    protected $table = 'student_scholarship_fund';
     protected $fillable = [
-        'scholarship_name',
-        'scholarship_type',
-        'status',
+     'fund_name',
+     'scholarship_id',
+     'status',
     ];
 }
