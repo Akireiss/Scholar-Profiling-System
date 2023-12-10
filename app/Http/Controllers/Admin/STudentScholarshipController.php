@@ -66,7 +66,6 @@ class StudentScholarshipController extends Controller
     }
 
 
-
      public function fetchFundSources($scholarshipId)
     {
         $fundSources = ScholarshipFund::where('scholarship_id', $scholarshipId)->get();
