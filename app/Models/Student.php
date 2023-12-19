@@ -36,14 +36,31 @@ class Student extends Model
         'student_status'
     ];
 
+        public function studentFund() {
+        return $this->hasMany(StudentFund::class);
+        }
+
     public function course() {
         return $this->belongsTo(Course::class);
     }
-    public function campus() {
-        return $this->belongsTo(Campus::class);
+    public function campus()
+    {
+        return $this->belongsTo(Campus::class, 'campus_id');
     }
-    public function studentFund() {
-    return $this->hasMany(StudentFund::class);
+
+
+    public function barangay()
+    {
+        return $this->belongsTo(Barangay::class);
+    }
+
+    public function municipal()
+    {
+        return $this->belongsTo(Municipality::class);
+    }
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
     }
 
 }

@@ -17,9 +17,9 @@ class StudentCreate extends Component
 
     public function render()
     {
-        $provinces = Province::where('regCode', '01')->get();
-        $municipalities = Municipality::where('provCode', '0133')->get();
-        $barangays = Barangay::where('citymunCode', '012801')->get();
+        $provinces = Province::all();
+        $municipalities = Municipality::where('province_id', 1)->get();
+        $barangays = Barangay::where('municipal_id', 2)->get();
 
         $nluc = Course::whereHas('campus', function ($query) {
             $query->where('campus_name', 'NLUC');

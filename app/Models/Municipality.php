@@ -9,12 +9,9 @@ class Municipality extends Model
 {
     use HasFactory;
 
-    protected $table = "municipality";
+    protected $table = "municipal";
     protected $fillable = [
-        'psgcCode',
-        'citymunDesc',
-        'regCode',
-        'provCode',
-        'citymunCode'
+        'municipality',
+        'province_id '
     ];
 }

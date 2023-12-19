@@ -12,10 +12,7 @@ class Barangay extends Model
 
     protected $table = "barangay";
     protected $fillable = [
-        'brgyCode',
-        'brgyDesc',
-        'regCode',
-        'provCode',
-        'citymunCode'
+        'barangay',
+        'municipal_id',
     ];
 }

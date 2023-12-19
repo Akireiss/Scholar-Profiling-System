@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Shopping Website</title>
+    <style>
+       body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+
+        nav {
+            background-color: #555;
+            text-align: center;
+            padding: 1em;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            margin: 0 1em;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            background-color: #777;
+        }
+
+        section {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 1em;
+        }
+
+        article {
+            margin: 1em;
+            padding: 1em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 300px;
+            text-align: center;
+        }
+
+        article img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 2em 0; /* Increased padding for better spacing */
+            position: fixed; /* Fixed position at the bottom */
+            width: 100%; /* Full width */
+            bottom: 0; /* Stick to the bottom */
+        }
+    </style>
+</head>
+<body>
+
+
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Items</a>
+        <a href="#">About Us</a>
+    </nav>
+
+    <section>
+        <article>
+            <img src="https://imgs.search.brave.com/bABrcYX8TcJXlDI0CwEKDKFocnvoaJcEkUcFgZ0eWwI/rs:fit:500:0:0/g:ce/aHR0cHM6Ly90aHlw/aXguY29tL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDIxLzEwL2dy/ZXktYW5pbWUtcHJv/ZmlsZS1waWN0dXJl/LXRoeXBpeC0xMDQt/NzAweDcwMC5qcGc"
+             alt="Product 1">
+            <h2>Product 1</h2>
+            <p>Description of Product 1.</p>
+            <p>$19.99</p>
+            <button>Add to Cart</button>
+        </article>
+
+        <article>
+            <img src="product2.jpg" alt="Product 2">
+            <h2>Product 2</h2>
+            <p>Description of Product 2.</p>
+            <p>$29.99</p>
+            <button onclick="alert">Add to Cart</button>
+        </article>
+
+        <!-- Add more articles for additional products -->
+
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Simple Shopping Website</p>
+    </footer>
+
+</body>
+</html>

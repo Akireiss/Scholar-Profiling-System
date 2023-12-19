@@ -14,6 +14,6 @@ class Scholarship extends Model
     protected $fillable = [
         'scholarship_name',
         'scholarship_type',
-        'status',
+        'status'
     ];
 }

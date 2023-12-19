@@ -16,11 +16,11 @@ class StudentFund extends Model
     'semester',
 
 
-    'government_scholarship_id',
-    'student_governemntfund_id',
+    'first_scholarship_id',
+    'student_firstfund_id',
 
-    'private_scholarship_id',
-    'student_privatefund_id',
+    'second_scholarship_id',
+    'student_secondfund_id',
 
    ];
 }
